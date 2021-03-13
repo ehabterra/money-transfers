@@ -23,7 +23,7 @@ func (a *Transaction) AddTransaction(w http.ResponseWriter, r *http.Request) {
 	transaction := services.TransactionData{}
 	err := json.NewDecoder(r.Body).Decode(&transaction)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		ShowError(w, err, http.StatusInternalServerError)
 		return
 	}
 
@@ -35,18 +35,18 @@ func (a *Transaction) AddTransaction(w http.ResponseWriter, r *http.Request) {
 
 	transactionData, err := a.service.AddTransaction(transaction)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		ShowError(w, err, http.StatusInternalServerError)
 		return
 	}
 
 	data, err := json.Marshal(transactionData)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		ShowError(w, err, http.StatusInternalServerError)
 		return
 	}
 
-	_, err = w.Write(data)
 	w.WriteHeader(http.StatusCreated)
+	_, err = w.Write(data)
 }
 
 func (a *Transaction) GetTransaction(w http.ResponseWriter, r *http.Request) {
@@ -55,24 +55,24 @@ func (a *Transaction) GetTransaction(w http.ResponseWriter, r *http.Request) {
 
 	id, err := strconv.Atoi(*m["id"])
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		ShowError(w, err, http.StatusInternalServerError)
 		return
 	}
 
 	transactionData, err := a.service.GetTransaction(id)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		ShowError(w, err, http.StatusInternalServerError)
 		return
 	}
 
 	data, err := json.Marshal(transactionData)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		ShowError(w, err, http.StatusInternalServerError)
 		return
 	}
 
-	_, err = w.Write(data)
 	w.WriteHeader(http.StatusOK)
+	_, err = w.Write(data)
 }
 
 func (a *Transaction) GetTransactions(w http.ResponseWriter, _ *http.Request) {
@@ -80,12 +80,12 @@ func (a *Transaction) GetTransactions(w http.ResponseWriter, _ *http.Request) {
 
 	data, err := json.Marshal(transactions)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		ShowError(w, err, http.StatusInternalServerError)
 		return
 	}
 
-	_, err = w.Write(data)
 	w.WriteHeader(http.StatusOK)
+	_, err = w.Write(data)
 }
 
 func (a *Transaction) DeleteTransaction(w http.ResponseWriter, r *http.Request) {
@@ -94,13 +94,13 @@ func (a *Transaction) DeleteTransaction(w http.ResponseWriter, r *http.Request) 
 
 	id, err := strconv.Atoi(*m["id"])
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		ShowError(w, err, http.StatusInternalServerError)
 		return
 	}
 
 	_, err = a.service.DeleteTransaction(id)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		ShowError(w, err, http.StatusInternalServerError)
 		return
 	}
 
