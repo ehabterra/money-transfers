@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/ehabterra/money_transfer/internal/models"
+	"github.com/ehabterra/money-transfers/internal/models"
 )
 
 // TransactionData to transfer money between accounts

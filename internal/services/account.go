@@ -3,7 +3,7 @@ package services
 import (
 	"errors"
 
-	"github.com/ehabterra/money_transfer/internal/models"
+	"github.com/ehabterra/money-transfers/internal/models"
 )
 
 type Account struct {

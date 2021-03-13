@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ehabterra/money_transfer/internal/models"
+	"github.com/ehabterra/money-transfers/internal/models"
 )
 
 func TestNewTransaction(t *testing.T) {

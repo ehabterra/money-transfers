@@ -3,9 +3,9 @@ package main
 import (
 	"net/http"
 
-	"github.com/ehabterra/money_transfer/api"
-	"github.com/ehabterra/money_transfer/internal/multiplexer"
-	"github.com/ehabterra/money_transfer/internal/services"
+	"github.com/ehabterra/money-transfers/api"
+	"github.com/ehabterra/money-transfers/internal/multiplexer"
+	"github.com/ehabterra/money-transfers/internal/services"
 )
 
 func prepareRoutes() *multiplexer.Server {

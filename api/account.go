@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/ehabterra/money_transfer/internal/multiplexer"
+	"github.com/ehabterra/money-transfers/internal/multiplexer"
 
-	"github.com/ehabterra/money_transfer/internal/models"
-	"github.com/ehabterra/money_transfer/internal/services"
+	"github.com/ehabterra/money-transfers/internal/models"
+	"github.com/ehabterra/money-transfers/internal/services"
 )
 
 type Account struct {

@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ehabterra/money_transfer/internal/models"
+	"github.com/ehabterra/money-transfers/internal/models"
 )
 
 func TestAccount_AddAccount(t *testing.T) {

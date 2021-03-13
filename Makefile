@@ -1,8 +1,8 @@
 run:
-	SERVER_PORT = 8080 go run github.com/ehabterra/money_transfer/cmd/server/
+	SERVER_PORT=8080 go run github.com/ehabterra/money-transfers/cmd/server/
 
 build:
-	SERVER_PORT = 8080 go build -o bin/money_transfer github.com/ehabterra/money_transfer/cmd/server
+	go build -o bin/money-transfers github.com/ehabterra/money-transfers/cmd/server
 
 test:
 	go test -cover ./internal/multiplexer/ ./internal/services/
