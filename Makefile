@@ -5,8 +5,10 @@ build:
 	go build -o bin/money-transfers github.com/ehabterra/money-transfers/cmd/server
 
 test:
-	go test -cover ./internal/multiplexer/ ./internal/services/
+	go test -cover -covermode=count ./internal/multiplexer/ ./internal/services/
 
+coverage:
+	go test -race -coverprofile=coverage.out -covermode=atomic ./...
 
 curl-add-account:
 	curl --header "Content-Type: application/json" \
