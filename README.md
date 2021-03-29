@@ -1,5 +1,8 @@
 # Money Transfers API
 
+![build](https://github.com/ehabterra/money-transfers/actions/workflows/ci.yml/badge.svg)
+[![codecov](https://codecov.io/github/ehabterra/money-transfers/branch/main/graph/badge.svg)](https://codecov.io/github/ehabterra/money-transfers)
+
 A simple API that simulates money transfers 
 between different accounts. The project consists of two main models. The
 first, is for managing accounts (CRUD) while the other is for
