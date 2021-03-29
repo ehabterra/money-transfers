@@ -7,9 +7,8 @@ A simple API that simulates money transfers
 between different accounts. The project consists of two main models. The
 first, is for managing accounts (CRUD) while the other is for
 managing transactions between accounts. 
-Next, I will explain a detailed description on folder structure and how
-to run and test this project. The following diagram depicts the relationship
-between account and transaction.
+Next, I'll explain in detail the folder structure and how to run and test this project. 
+The following diagram shows the relationship between an account and a transaction. 
 
 ## Notes: the application is tested only on Linux Ubuntu.
 
