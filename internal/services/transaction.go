@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"sync"
 	"time"
 
 	"github.com/ehabterra/money-transfers/internal/models"
@@ -21,6 +22,7 @@ type TransactionData struct {
 type Transaction struct {
 	accountService *Account
 	transactions   []models.Transaction
+	mu             sync.Mutex
 }
 
 // NewTransaction construct transactions service
@@ -58,8 +60,13 @@ func (a *Transaction) AddTransaction(data TransactionData) (*models.Transaction,
 		return nil, err
 	}
 
+	// make sure to not change balance concurrently
+	a.mu.Lock()
+
 	fromAccount.Balance -= data.Amount
 	toAccount.Balance += data.Amount
+
+	a.mu.Unlock()
 
 	a.transactions = append(a.transactions, *trn)
 
@@ -73,9 +80,13 @@ func (a *Transaction) DeleteTransaction(id int) (*models.Transaction, error) {
 		return nil, err
 	}
 
+	a.mu.Lock()
+
 	// return amounts to balance
 	transaction.FromAccount.Balance += transaction.Amount
 	transaction.ToAccount.Balance -= transaction.Amount
+
+	a.mu.Unlock()
 
 	transaction.Deleted = true
 	return transaction, nil
