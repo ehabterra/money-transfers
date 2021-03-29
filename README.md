@@ -14,9 +14,17 @@ between account and transaction.
 
 ## Table of Content
 1. [Money Transfers API](#money-transfers-api)
-1. [Folder Structure](#folder-structure)
-1. [Helper Commands](#helper-commands)
+2. [Main Features](#main-features)
+3. [Folder Structure](#folder-structure)
+4. [Helper Commands](#helper-commands)
 
+## Main Features
+
+There are some points I want to make sure they are clear:
+* I tried to keep simplicity as possible as I can so the objects are not complete.
+* Only used the built-in libraries so I built my own mux to be able to add a parametered route.
+* No database is used only memory to store objects.
+* For thread-safe process I made a lock on balance change to make sure that no dirty-read operations.
 
 ## Folder Structure:
 
@@ -25,11 +33,11 @@ between account and transaction.
 * `internal/`
   * `models/` struct for domain models
   * `multiplexer/` instead of importing a third party library I stuck to 
-    only use standard libraries and create my own mux.
+    only use built-in libraries and create my own mux.
   * `services/` domain model services
 * `Makefile` commands shortcuts
 * `Transfer Money.postman_collection.json` exported Postman collection to
-easing API test.
+facilitate API testing.
 
 
 ## Helper Commands:
