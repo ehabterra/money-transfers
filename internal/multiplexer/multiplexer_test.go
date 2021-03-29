@@ -58,6 +58,28 @@ func TestRoute_ResolveURL(t *testing.T) {
 			map[string]*string{"id": &params[0], "name": &params[1]},
 			false,
 		},
+		{
+			"not_exists",
+			fields{
+				Pattern: "test/{id}/{name}",
+				Method:  "GET",
+				Handler: nil,
+			},
+			args{urlPath: "test/1/Ehab/test"},
+			nil,
+			true,
+		},
+		{
+			"not_exists",
+			fields{
+				Pattern: "test/{id}/{name}",
+				Method:  "GET",
+				Handler: nil,
+			},
+			args{urlPath: "ggg/1/Ehab/"},
+			nil,
+			true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

@@ -34,6 +34,11 @@ func (r *Route) resolveURL(urlPath string) (map[string]*string, error) {
 	}
 
 	for i := range urlParts {
+
+		if len(patternParts) <= i {
+			return nil, errors.New("url does not match pattern")
+		}
+
 		findString := reg.FindStringSubmatch(patternParts[i])
 		if len(findString) > 1 {
 			if _, ok := params[findString[1]]; ok {

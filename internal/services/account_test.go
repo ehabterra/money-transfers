@@ -27,20 +27,36 @@ func TestAccount_AddAccount(t *testing.T) {
 	}{
 		{"basic",
 			fields{
-				[]models.Account{
-					{"1", 0, false},
-				},
+				nil,
 			},
 			args{account.AccountNo, account.Balance},
 			account,
 			false,
 		},
+		{"empty_account",
+			fields{
+				[]models.Account{
+					{"1", 0, false},
+				},
+			},
+			args{"", account.Balance},
+			nil,
+			true,
+		},
+		{"wrong_account",
+			fields{
+				[]models.Account{
+					{"1", 0, false},
+				},
+			},
+			args{"1", account.Balance},
+			nil,
+			true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			a := &Account{
-				accounts: tt.fields.accounts,
-			}
+			a := NewAccount(tt.fields.accounts)
 			got, err := a.AddAccount(tt.args.accountNo, tt.args.balance)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("AddAccount() error = %v, wantErr %v", err, tt.wantErr)
@@ -119,12 +135,21 @@ func TestAccount_GetAccount(t *testing.T) {
 			account,
 			false,
 		},
+		{"not_exists",
+			fields{
+				[]models.Account{
+					{"1", 0, false},
+					*account,
+				},
+			},
+			args{"3"},
+			nil,
+			true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			a := &Account{
-				accounts: tt.fields.accounts,
-			}
+			a := NewAccount(tt.fields.accounts)
 			got, err := a.GetAccount(tt.args.accountNo)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetAccount() error = %v, wantErr %v", err, tt.wantErr)
@@ -196,6 +221,17 @@ func TestAccount_UpdateAccount(t *testing.T) {
 			args{account.AccountNo, account.Balance},
 			account,
 			false,
+		},
+		{"not_exists",
+			fields{
+				[]models.Account{
+					{"1", 0, false},
+					{"2", 0, false},
+				},
+			},
+			args{"3", account.Balance},
+			nil,
+			true,
 		},
 	}
 	for _, tt := range tests {

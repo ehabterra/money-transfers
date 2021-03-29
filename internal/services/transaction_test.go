@@ -76,7 +76,7 @@ func TestTransaction_AddTransaction(t *testing.T) {
 		transaction TransactionData
 	}
 
-	accountService, transactions := prepare(t)
+	accountService, _ := prepare(t)
 	fromAccount, err := accountService.GetAccount("1")
 	if err != nil {
 		t.Fatalf("error when getting from account: %v", err)
@@ -102,7 +102,7 @@ func TestTransaction_AddTransaction(t *testing.T) {
 			"basic",
 			fields{
 				accountService: accountService,
-				transactions:   transactions,
+				transactions:   nil,
 			},
 			args{
 				TransactionData{
@@ -114,7 +114,7 @@ func TestTransaction_AddTransaction(t *testing.T) {
 				},
 			},
 			&models.Transaction{
-				ID:          2,
+				ID:          1,
 				FromAccount: fromAccount,
 				ToAccount:   toAccount,
 				Amount:      50,
@@ -126,10 +126,7 @@ func TestTransaction_AddTransaction(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			a := &Transaction{
-				accountService: tt.fields.accountService,
-				transactions:   tt.fields.transactions,
-			}
+			a := NewTransaction(tt.fields.accountService, tt.fields.transactions)
 			got, err := a.AddTransaction(tt.args.transaction)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("AddTransaction() error = %v, wantErr %v", err, tt.wantErr)
