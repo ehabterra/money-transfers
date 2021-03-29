@@ -10,9 +10,11 @@ managing transactions between accounts.
 Next, I'll explain in detail the folder structure and how to run and test this project. 
 The following diagram shows the relationship between an account and a transaction. 
 
-## Notes: the application is tested only on Linux Ubuntu.
+![diagram](diagram.svg)
 
-![diagram](diagram.svg "Diagram")
+
+**Notes:** the application is only tested on Linux Ubuntu 18.04.
+
 
 ## Table of Content
 1. [Money Transfers API](#money-transfers-api)
